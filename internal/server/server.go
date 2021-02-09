@@ -39,6 +39,10 @@ func faviconHandler(w http.ResponseWriter, r *http.Request) {
 
 func imgHandler(w http.ResponseWriter, r *http.Request) {
 	rend(w, "img")
+
+	// Щоб не було дублювання коду, виносимо провірку у func rend()
+	//------------------------------------------------------------
+
 	//_, err := w.Write([]byte("img"))
 	//if err != nil {
 	//	log.Fatalln(err)
