@@ -1,18 +1,19 @@
 package server
 
 import (
+	"github.com/apalyukha/image-generator/configs"
 	"log"
 	"net/http"
 )
 
-func Run() {
+func Run(conf configs.ConfI) {
 	http.HandleFunc("/", imgHandler)
 	http.HandleFunc("/favicon.ico", faviconHandler)
 	http.HandleFunc("/ping", pingHandler)
 	http.HandleFunc("/robots.txt", robotsHandler)
 
 	log.Println("Server starting ...")
-	if err := http.ListenAndServe(":8080", nil); err != nil {
+	if err := http.ListenAndServe(":"+conf.GetPort(), nil); err != nil {
 		log.Fatalln(err)
 	}
 
