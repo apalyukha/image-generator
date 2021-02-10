@@ -1,7 +1,7 @@
 # Project build binary
 .build
 .bin
-.env
+#.env
 
 # Mac OS X files
 .DS_Store
@@ -28,4 +28,4 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
-/build/
+build/
