@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-type ConfI interface {
+type IConf interface {
 	GetPort() string
 }
 
