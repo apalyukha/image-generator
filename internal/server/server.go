@@ -5,7 +5,10 @@ import (
 	"github.com/apalyukha/image-generator/pkg/img"
 	"log"
 	"net/http"
+	"os"
+	"os/signal"
 	"strconv"
+	"syscall"
 )
 
 func Run(conf configs.IConf) {
@@ -14,11 +17,19 @@ func Run(conf configs.IConf) {
 	http.HandleFunc("/ping", pingHandler)
 	http.HandleFunc("/robots.txt", robotsHandler)
 
-	log.Println("Server starting ...")
-	if err := http.ListenAndServe(":"+conf.GetPort(), nil); err != nil {
-		log.Fatalln(err)
-	}
+	sigs := make(chan os.Signal, 1)
+	signal.Notify(sigs, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
 
+	go func() {
+		log.Println("Server starting ...")
+		if err := http.ListenAndServe(":"+conf.GetPort(), nil); err != nil {
+			log.Fatalln(err)
+		}
+	}()
+
+	signalValue := <-sigs
+	signal.Stop(sigs)
+	log.Println("stop signal: ", signalValue)
 }
 
 func rend(w http.ResponseWriter, msg string) {
