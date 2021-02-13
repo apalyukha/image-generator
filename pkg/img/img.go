@@ -21,3 +21,7 @@ func GenerateFavicon() (*bytes.Buffer, error) {
 	}
 	return buffer, nil
 }
+
+func Generate(urlPart []string) (*bytes.Buffer, error) {
+	return nil, nil // ...
+}

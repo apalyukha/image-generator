@@ -40,7 +40,13 @@ func rend(w http.ResponseWriter, msg string) {
 }
 
 func robotsHandler(w http.ResponseWriter, r *http.Request) {
-	rend(w, "robots")
+	//rend(w, "robots")
+
+	// ...
+	//buffer, err := img.Generate(strings.Split(r.URL.Path, "/"))
+	//if err != nil {
+	//	log.Println(err)
+	//}
 }
 
 func pingHandler(w http.ResponseWriter, r *http.Request) {
